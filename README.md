@@ -67,4 +67,4 @@ The WASM version has all code in ES Modules.
 
 To use the WASM version with Node.js, please add `--experimental-wasm-modules` to your Node.js command line options to enable Node.js to load `.wasm` modules. For older version of Node.js you'll also need `--experimental-modules` to enable basic ES Modules support.
 
-To use the WASM version in browser, you may need to [configure your Webpack](https://rustwasm.github.io/wasm-bindgen/examples/hello-world.html).
+To use the WASM version in browser, you may need to configure your Webpack to add the [`@wasm-tool/wasm-pack-plugin`](https://www.npmjs.com/package/@wasm-tool/wasm-pack-plugin) plugin to your Webpack configuration.
