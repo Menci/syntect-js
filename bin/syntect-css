@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+
+const syntect = require("..");
+
+async function readStdin() {
+  let content = "";
+
+  process.stdin.resume();
+  process.stdin.on("data", buffer => {
+    content += buffer.toString("utf-8");
+  });
+
+  await new Promise((resolve, reject) => {
+    process.stdin
+      .on("end", resolve)
+      .on("error", reject);
+  });
+
+  return content;
+}
+
+(async () => {
+  try {
+    const tmTheme = await readStdin();
+    if (!tmTheme.trim()) {
+      console.error("No data in stdin.");
+      process.exit(1);
+    }
+  
+    const result = syntect.getCSS(tmTheme, process.argv[2] || "");
+    if (result.error) {
+      console.error("Error:", result.error);
+      process.exit(1);
+    }
+  
+    console.log(result.css);  
+  } catch (e) {
+    console.log(e);
+  }
+})();

@@ -1,0 +1,13 @@
+{
+  "name": "@syntect/wasm",
+  "version": "0.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Menci/syntect-js",
+  "author": "Menci <huanghaorui301@gmail.com>",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "prepublishOnly": "cp ../README.md ."
+  },
+  "description": "Syntect (Syntax highlighter in Rust) for Node.js and WebAssembly"
+}
