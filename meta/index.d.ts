@@ -1,3 +1,3 @@
-import type Default from "@syntect/node";
-export type * from "@syntect/node";
+import Default from "@syntect/node";
+export * from "@syntect/node";
 export default Default;

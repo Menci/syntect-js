@@ -2,7 +2,7 @@
 
 [Syntect (Syntax highlighter in Rust)](https://github.com/trishume/syntect) for Node.js and WebAssembly.
 
-Syntect highlights code to TextMate's `.tmTheme` theme. And the highlighting result is independent of the theme (unlike [Shiki](https://github.com/shikijs/shiki)) so you can switch themes in your website by only switching CSS.
+Syntect highlights code with TextMate's `.tmTheme` theme. And the highlighting result is independent of the theme (using CSS classes, unlike [Shiki](https://github.com/shikijs/shiki), which uses inline styles) so you can switch themes in your website by only switching CSS.
 
 
 ```bash

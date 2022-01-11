@@ -1,3 +1,3 @@
-import Default from "@syntect/browser";
-export * from "@syntect/browser";
+import Default from "@syntect/wasm";
+export * from "@syntect/wasm";
 export default Default;
