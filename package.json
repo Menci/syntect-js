@@ -1,6 +1,6 @@
 {
   "name": "@syntect/node",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "types": "index.d.ts",
   "bin": {
@@ -46,7 +46,7 @@
     "build:wasm:debug": "cargo build --target wasm32-unknown-unknown --no-default-features --features=target_wasm && yarn wasm-bindgen:debug",
     "wasm-bindgen": "wasm-bindgen --out-dir wasm/dist ./target/wasm32-unknown-unknown/release/syntect.wasm",
     "wasm-bindgen:debug": "wasm-bindgen --out-dir wasm/dist ./target/wasm32-unknown-unknown/debug/syntect.wasm",
-    "prepublishOnly": "napi prepublish -t npm",
+    "prepublishOnly": "napi prepublish --skip-gh-release",
     "version": "napi version"
   },
   "description": "Syntect (Syntax highlighter in Rust) for Node.js",
