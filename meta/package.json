@@ -1,0 +1,19 @@
+{
+  "name": "syntect",
+  "version": "0.0.0",
+  "main": "node.cjs",
+  "browser": "browser.js",
+  "types": "index.d.ts",
+  "repository": "https://github.com/Menci/syntect-js",
+  "author": "Menci <huanghaorui301@gmail.com>",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "prepublishOnly": "cp ../README.md ."
+  },
+  "description": "Syntect (Syntax highlighter in Rust) for Node.js and WebAssembly",
+  "dependencies": {
+    "@syntect/node": "0.0.0",
+    "@syntect/wasm": "0.0.0"
+  }
+}

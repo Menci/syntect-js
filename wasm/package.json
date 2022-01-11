@@ -6,8 +6,15 @@
   "author": "Menci <huanghaorui301@gmail.com>",
   "type": "module",
   "license": "MIT",
+  "keywords": [
+    "highlight",
+    "rust",
+    "syntect",
+    "textmate",
+    "wasm"
+  ],
   "scripts": {
     "prepublishOnly": "cp ../README.md ."
   },
-  "description": "Syntect (Syntax highlighter in Rust) for Node.js and WebAssembly"
+  "description": "Syntect (Syntax highlighter in Rust) for WebAssembly"
 }

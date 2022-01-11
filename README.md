@@ -1,11 +1,17 @@
 # Syntect for Node.js and WASM
 
-[Syntect (Syntax highlighter in Rust)](https://github.com/trishume/) for Node.js and WebAssembly.
+[Syntect (Syntax highlighter in Rust)](https://github.com/trishume/syntect) for Node.js and WebAssembly.
 
 Syntect highlights code to TextMate's `.tmTheme` theme. And the highlighting result is independent of the theme (unlike [Shiki](https://github.com/shikijs/shiki)) so you can switch themes in your website by only switching CSS.
 
 
 ```bash
+# Install the meta-package
+yarn add syntect       # Auto choose --
+                       # Native binding for Node.js
+                       # WebAssembly for browser
+
+# Or Install manually
 yarn add @syntect/node # Node.js native binding
 yarn add @syntect/wasm # WebAssembly
 ```
@@ -15,7 +21,7 @@ yarn add @syntect/wasm # WebAssembly
 **Note:** See [WASM Notes](#wasm-notes) if you encountered any error using the WASM version.
 
 ```typescript
-import { getCSS, highlight } from "@syntect/node" /* or "@syntect/wasm" */;
+import { getCSS, highlight } from "syntect" /* or "@syntect/node" / "@syntect/wasm" */;
 
 // Generate CSS code from .tmTheme file
 const result = getCSS(
@@ -43,10 +49,11 @@ console.log(result.html);
 
 # CLI
 
-There's a cli utility for `getCSS` function. You should install `@syntect/node` to use it.
+There's a cli utility for `getCSS` function. You should install the Node.js version (`syntect` or `@syntect/node`) to use it.
 
 ```bash
-# Install with `yarn add @syntect/node`
+# Install with `yarn add syntect` or `yarn add @syntect/node`
+
 # yarn syntect-css <prefix>
 cat my-theme.tmTheme | yarn syntect-css hl-
 

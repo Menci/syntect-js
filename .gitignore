@@ -3,6 +3,10 @@
 Cargo.lock
 *.node
 
+# meta
+/meta/node_modules
+/meta/yarn.lock
+
 # wasm
 /wasm/dist
 

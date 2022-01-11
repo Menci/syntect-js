@@ -260,23 +260,41 @@ jobs:
       - name: Move artifacts
         run: yarn artifacts
       - name: List packages
-        run: ls -R ./npm
+        run: ls -R ./npm ./wasm ./meta
         shell: bash
       - name: Publish
         run: |
           sudo apt-get -y install jq moreutils
+
+          # WASM
           jq '.[0].version = .[1].version | .[0]' -s wasm/package.json package.json | sponge wasm/package.json
+
+          # Meta
+          jq '.[0].version = .[1].version | .[0]' -s meta/package.json package.json | sponge meta/package.json
+          jq '.[0].dependencies[] = .[1].version | .[0]' -s meta/package.json package.json | sponge meta/package.json
+          jq '.[0].keywords = ([.[1].keywords, .[2].keywords] | flatten | unique) | .[0]' -s meta/package.json package.json wasm/package.json | sponge meta/package.json
+
+          PACKAGES=(
+            "."
+            "wasm"
+            "meta"
+          )
+          function run_in_all_pkgs() {
+            for i in ${PACKAGES[@]}; do
+              pushd $i
+              "$@"
+              popd
+            done
+          }
 
           if git log -1 --pretty=%B | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+$";
           then
             echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-            npm publish --access public
-            (cd wasm && npm publish --access public)
+            run_in_all_pkgs npm publish --access public
           elif git log -1 --pretty=%B | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+";
           then
             echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-            npm publish --tag next --access public
-            (cd wasm && npm publish --tag next --access public)
+            run_in_all_pkgs npm publish --tag next --access public
           else
             echo "Not a release, skipping publish"
           fi
