@@ -16,7 +16,7 @@ crate-type = ["cdylib"]
 napi = { version = "2.0.2", optional = true, default-features = false, features = ["napi4"] }
 napi-derive = { version = "2.0.6", optional = true }
 wasm-bindgen = { version = "0.2.78", optional = true }
-syntect = { version = "4.6", default-features = false }
+syntect = { version = "5.2", default-features = false }
 
 [build-dependencies]
 napi-build = { version = "1.2.1", optional = true }

@@ -70,4 +70,4 @@ To use the WASM version with Node.js, please add `--experimental-wasm-modules` t
 To use the WASM version in browser, you may need to configure your bundler:
 
 * *Webpack 5*: enable `experiments.asyncWebAssembly`.
-* *Vite*: not currently supported but related works are in progress.
+* *Vite*: use [vite-plugin-wasm](https://github.com/Menci/vite-plugin-wasm).

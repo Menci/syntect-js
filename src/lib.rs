@@ -24,18 +24,25 @@ pub struct GetCssResult {
 pub fn get_css(theme_data: String, class_name_prefix: String) -> GetCssResult {
   match ThemeSet::load_from_reader(&mut std::io::Cursor::new(theme_data)) {
     Ok(theme) => {
-      let result: String;
       unsafe {
         let prefix = Box::into_raw(class_name_prefix.into_boxed_str());
-        result =
-          css_for_theme_with_class_style(&theme, ClassStyle::SpacedPrefixed { prefix: &*prefix });
-        Box::from_raw(prefix);
+        match css_for_theme_with_class_style(&theme, ClassStyle::SpacedPrefixed { prefix: &*prefix }) {
+          Ok(css) => {
+            let _ = Box::from_raw(prefix);
+            return GetCssResult {
+              css: css,
+              error: "".to_string(),
+            };
+          },
+          Err(error) => {
+            let _ = Box::from_raw(prefix);
+            return GetCssResult {
+              css: "".to_string(),
+              error: error.to_string(),
+            };
+          },
+        }
       }
-
-      return GetCssResult {
-        css: result,
-        error: "".to_string(),
-      };
     }
     Err(error) => {
       return GetCssResult {
@@ -91,10 +98,10 @@ pub fn highlight(code: String, language: String, prefix: String) -> HighlightRes
       },
     );
     for line in LinesWithEndings::from(&code) {
-      generator.parse_html_for_line_which_includes_newline(line);
+      let _ = generator.parse_html_for_line_which_includes_newline(line);
     }
     result = generator.finalize();
-    Box::from_raw(prefix_str);
+    let _ = Box::from_raw(prefix_str);
   }
 
   return HighlightResult {
